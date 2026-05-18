@@ -1,4 +1,4 @@
-name: Build and Push posts-service
+name: Build and Push print-service
 
 on:
   push:
@@ -7,7 +7,8 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  DEPLOY_REPO: ${{ github.repository_owner }}/cloud-deployment
+  IMAGE_NAME: print-service
+  DEPLOY_REPO: ${{ github.repository_owner }}/cloud-deployment-is-order
 
 jobs:
   build:

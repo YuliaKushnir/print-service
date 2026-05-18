@@ -1,0 +1,107 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                           xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="001-create-print-types" author="yuliia kushnir">
+
+        <createTable tableName="print_types">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <insert tableName="print_types">
+            <column name="id" valueNumeric="1"/>
+            <column name="name" value="Флекс"/>
+        </insert>
+
+        <insert tableName="print_types">
+            <column name="id" valueNumeric="2"/>
+            <column name="name" value="Цифровий друк"/>
+        </insert>
+
+    </changeSet>
+
+    <changeSet id="002-create-print-prices" author="yuliia kushnir">
+
+        <createTable tableName="print_prices">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+
+            <column name="print_type_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="size" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+
+            <column name="price" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint
+                baseTableName="print_prices"
+                baseColumnNames="print_type_id"
+                referencedTableName="print_types"
+                referencedColumnNames="id"
+                constraintName="fk_print_price_type"/>
+
+        <!-- FLEX PRICES -->
+        <insert tableName="print_prices">
+            <column name="print_type_id" valueNumeric="1"/>
+            <column name="size" value="A3"/>
+            <column name="price" valueNumeric="180"/>
+        </insert>
+
+        <insert tableName="print_prices">
+            <column name="print_type_id" valueNumeric="1"/>
+            <column name="size" value="A4"/>
+            <column name="price" valueNumeric="150"/>
+        </insert>
+
+        <insert tableName="print_prices">
+            <column name="print_type_id" valueNumeric="1"/>
+            <column name="size" value="A5"/>
+            <column name="price" valueNumeric="120"/>
+        </insert>
+
+        <insert tableName="print_prices">
+            <column name="print_type_id" valueNumeric="1"/>
+            <column name="size" value="A6"/>
+            <column name="price" valueNumeric="100"/>
+        </insert>
+
+        <!-- DIGITAL PRINT PRICES -->
+        <insert tableName="print_prices">
+            <column name="print_type_id" valueNumeric="2"/>
+            <column name="size" value="A3"/>
+            <column name="price" valueNumeric="220"/>
+        </insert>
+
+        <insert tableName="print_prices">
+            <column name="print_type_id" valueNumeric="2"/>
+            <column name="size" value="A4"/>
+            <column name="price" valueNumeric="190"/>
+        </insert>
+
+        <insert tableName="print_prices">
+            <column name="print_type_id" valueNumeric="2"/>
+            <column name="size" value="A5"/>
+            <column name="price" valueNumeric="160"/>
+        </insert>
+
+        <insert tableName="print_prices">
+            <column name="print_type_id" valueNumeric="2"/>
+            <column name="size" value="A6"/>
+            <column name="price" valueNumeric="130"/>
+        </insert>
+
+    </changeSet>
+
+</databaseChangeLog>
